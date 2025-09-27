@@ -26287,8 +26287,8 @@ MonoBehaviour:
   explode1: {fileID: 1077924626}
   explode2: {fileID: 1503424179}
   health: 3
-  mental: 2
-  gas: 1
+  mental: 3
+  gas: 3
   gass:
   - {fileID: 498189963}
   - {fileID: 739593126}

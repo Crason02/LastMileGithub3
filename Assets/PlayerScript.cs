@@ -58,12 +58,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Glass"))
         {
+            health -= 1;
             if (rb.linearVelocity.x != 0)
             {
                 velo = rb.linearVelocity;
                 freeze = true;
                 CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
             }
+            updateUI();
         }
         if (other.CompareTag("tree"))
         {
@@ -75,6 +77,10 @@ public class PlayerScript : MonoBehaviour
             explode2.Play();
             explode1.Play();
             CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
+            health = 0;
+            mental = 0;
+            gas = 0;
+            updateUI();
         }
     }
 

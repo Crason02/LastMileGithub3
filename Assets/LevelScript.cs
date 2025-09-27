@@ -35,8 +35,10 @@ public class LevelScript : MonoBehaviour
 
     public void glassFunc()
     {
-        Instantiate(glass);
-        Invoke("glassFunc", Random.Range(2f, 10f));
+        if (!stop) {
+            Instantiate(glass);
+            Invoke("glassFunc", Random.Range(2f, 10f));
+        }
     }
 
     public void freeze()
