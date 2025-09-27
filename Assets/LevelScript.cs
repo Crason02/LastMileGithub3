@@ -8,10 +8,12 @@ public class LevelScript : MonoBehaviour
     public float roadHeight = 10f;
     public bool stop = false;
     public GameObject glass;
+    public GameObject turtle;
 
     void Start()
     {
-        glassFunc();
+        Invoke("glassFunc", 5f);
+        Invoke("turtFunc", Random.Range(2f, 10f));
     }
     void Update()
     {
@@ -38,6 +40,13 @@ public class LevelScript : MonoBehaviour
         if (!stop) {
             Instantiate(glass);
             Invoke("glassFunc", Random.Range(2f, 10f));
+        }
+    }
+    public void turtFunc()
+    {
+        if (!stop) {
+            Instantiate(turtle);
+            Invoke("turtFunc", Random.Range(2f, 10f));
         }
     }
 

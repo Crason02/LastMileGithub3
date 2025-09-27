@@ -58,14 +58,17 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Glass"))
         {
-            health -= 1;
             if (rb.linearVelocity.x != 0)
             {
                 velo = rb.linearVelocity;
                 freeze = true;
-                CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
             }
-            updateUI();
+            else
+            {
+                health -= 1;
+                updateUI();
+            }
+            CameraShake.Instance.ShakeOnce(0.2f, 0.1f);
         }
         if (other.CompareTag("tree"))
         {
@@ -76,10 +79,20 @@ public class PlayerScript : MonoBehaviour
             ps2.Stop();
             explode2.Play();
             explode1.Play();
-            CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
+            CameraShake.Instance.ShakeOnce(0.3f, 0.3f);
             health = 0;
             mental = 0;
             gas = 0;
+            updateUI();
+        }
+        if (other.CompareTag("Turtle"))
+        {
+            mental -= 2;
+            health += 1;
+            if (health>3) {
+                health = 3;
+            }
+            CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
             updateUI();
         }
     }
@@ -109,12 +122,43 @@ public class PlayerScript : MonoBehaviour
         {
             gass[x].SetActive(true);
         }
-        for (int x=0; x<3; x++) {
+        for (int x = 0; x < 3; x++)
+        {
             mentals[x].SetActive(false);
         }
         for (int x = 0; x < mental; x++)
         {
             mentals[x].SetActive(true);
+        }
+        if (mental ==0 && health ==0 && gas ==0) {
+            
+        }else if (mental == 0)
+        {
+            if (rb.linearVelocity.x != 0)
+            {
+                velo = rb.linearVelocity;
+                freeze = true;
+            }
+            else
+            {
+                velo = new Vector2(2f, 0);
+                freeze = true;
+            }
+            CameraShake.Instance.ShakeOnce(10f, 1f);
+        }
+        else if (health == 0)
+        {
+            velo = new Vector2(0f, 0f);
+            freeze = true;
+            ps1.Stop();
+            ps2.Stop();
+            explode2.Play();
+            explode1.Play();
+        } else if (gas == 0) {
+            velo = new Vector2(0f, 0f);
+            freeze = true;
+            ps1.Stop();
+            ps2.Stop();
         }
     }
 }
