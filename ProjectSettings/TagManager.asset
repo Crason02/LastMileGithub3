@@ -7,6 +7,11 @@ TagManager:
   - Glass
   - tree
   - Turtle
+  - Gas
+  - Water
+  - Beer
+  - Med
+  - timert
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,8 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
+
     public Rigidbody2D rb;
     public float moveSpeed = 5f;
     public float turnSpeed = 200f;
@@ -21,9 +22,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject[] gass;
     public GameObject[] mentals;
     public GameObject[] healths;
+    public GameObject textyk;
+    public GameObject winwin;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Invoke("loseGas", 30f);
         updateUI();
     }
 
@@ -50,25 +54,30 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
             rb.linearVelocity = velo;
         }
+    }
+
+    public void loseGas()
+    {
+        gas--;
+        Invoke("loseGas", 30f);
+        updateUI();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Glass"))
         {
-            if (rb.linearVelocity.x != 0)
-            {
-                velo = rb.linearVelocity;
-                freeze = true;
-            }
-            else
-            {
-                health -= 1;
-                updateUI();
-            }
+            health -= 1;
+            gas -= 1;
+            updateUI();
             CameraShake.Instance.ShakeOnce(0.2f, 0.1f);
+            Destroy(other.gameObject);
         }
         if (other.CompareTag("tree"))
         {
@@ -87,13 +96,65 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.CompareTag("Turtle"))
         {
-            mental -= 2;
+            mental -= 1;
             health += 1;
-            if (health>3) {
+            if (health > 3)
+            {
                 health = 3;
             }
             CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
             updateUI();
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Gas"))
+        {
+            gas += 1;
+            if (gas > 3)
+            {
+                gas = 3;
+            }
+            if (health > 3)
+            {
+                health = 3;
+            }
+            updateUI();
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Water"))
+        {
+            if (rb.linearVelocity.x != 0)
+            {
+                velo = rb.linearVelocity;
+                freeze = true;
+            }
+            else
+            {
+                health -= 1;
+                mental -= 1;
+                gas -= 1;
+                updateUI();
+            }
+        }
+        if (other.CompareTag("Beer"))
+        {
+            mental += 3;
+            if (mental > 3)
+            {
+                mental = 3;
+            }
+            updateUI();
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Beer"))
+        {
+            health += 2;
+            if (health > 3)
+            {
+                health = 3;
+            }
+            updateUI();
+            Destroy(other.gameObject);
         }
     }
 
@@ -130,9 +191,13 @@ public class PlayerScript : MonoBehaviour
         {
             mentals[x].SetActive(true);
         }
-        if (mental ==0 && health ==0 && gas ==0) {
-            
-        }else if (mental == 0)
+        if (mental == 0 && health == 0 && gas == 0)
+        {
+            Invoke("gameOver", 5f);
+            GameObject.Find("timer").GetComponent<TimerScript>().freeze();
+            GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+        }
+        else if (mental <= 0)
         {
             if (rb.linearVelocity.x != 0)
             {
@@ -141,12 +206,15 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                velo = new Vector2(2f, 0);
+                velo = new Vector2(5f, 0);
                 freeze = true;
             }
-            CameraShake.Instance.ShakeOnce(10f, 1f);
+            CameraShake.Instance.ShakeOnce(5f, 1f);
+            GameObject.Find("timer").GetComponent<TimerScript>().freeze();
+            GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+            Invoke("gameOver", 5f);
         }
-        else if (health == 0)
+        else if (health <= 0)
         {
             velo = new Vector2(0f, 0f);
             freeze = true;
@@ -154,11 +222,32 @@ public class PlayerScript : MonoBehaviour
             ps2.Stop();
             explode2.Play();
             explode1.Play();
-        } else if (gas == 0) {
+            GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+            GameObject.Find("timer").GetComponent<TimerScript>().freeze();
+            Invoke("gameOver", 5f);
+        }
+        else if (gas <= 0)
+        {
             velo = new Vector2(0f, 0f);
             freeze = true;
             ps1.Stop();
             ps2.Stop();
+            GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+            GameObject.Find("timer").GetComponent<TimerScript>().freeze();
+            Invoke("gameOver", 5f);
         }
     }
+
+    public void gameOver()
+    {
+        textyk.SetActive(true);
+    }
+
+    public void winGame()
+    {
+        GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+        freeze = true;
+        textyk.SetActive(true);
+    }
+
 }
