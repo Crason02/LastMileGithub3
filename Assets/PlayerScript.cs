@@ -9,6 +9,10 @@ public class PlayerScript : MonoBehaviour
     public float maxTurnAngle = 17.6f;
     public bool freeze = false;
     public Vector2 velo;
+    public ParticleSystem ps1;
+    public ParticleSystem ps2;
+    public ParticleSystem explode1;
+    public ParticleSystem explode2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,13 +50,22 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Glass"))
         {
-            velo = rb.linearVelocity;
-            freeze = true;
+            if (rb.linearVelocity.x!=0) {
+                velo = rb.linearVelocity;
+                freeze = true;
+                CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
+            }
         }
         if (other.CompareTag("tree"))
         {
             velo = new Vector2(0, 0);
             freeze = true;
+            GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+            ps1.Stop();
+            ps2.Stop();
+            explode2.Play();
+            explode1.Play();
+            CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
         }
     }
     

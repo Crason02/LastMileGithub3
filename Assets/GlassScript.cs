@@ -12,5 +12,9 @@ public class GlassScript : MonoBehaviour
     void Update()
     {
         gameObject.transform.Translate(Vector3.down * 10f * Time.deltaTime);
+        if (transform.position.y < -40)
+        {
+            Destroy(gameObject);
+        }
     }
 }
