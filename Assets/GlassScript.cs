@@ -17,4 +17,8 @@ public class GlassScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void banish() { 
+        Destroy(gameObject);
+    }
 }
