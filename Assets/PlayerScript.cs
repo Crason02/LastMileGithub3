@@ -15,6 +15,16 @@ public class PlayerScript : MonoBehaviour
     {
         float linearVelo = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(linearVelo * moveSpeed, 0);
-        Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
+        rb.MoveRotation(rb.rotation + -linearVelo * 200f * Time.fixedDeltaTime);
+        float targetRotation = rb.rotation + -linearVelo * 200f * Time.fixedDeltaTime;
+        float clampedRotation = Mathf.Clamp(NormalizeAngle(targetRotation), -17.6f, 17.6f);
+        rb.MoveRotation(clampedRotation);
     }
+    
+    float NormalizeAngle(float angle)
+    {
+        while (angle > 180f) angle -= 360f;
+        while (angle < -180f) angle += 360f;
+        return angle;
+    }   
 }
