@@ -15,15 +15,6 @@ public class PlayerScript : MonoBehaviour
     {
         float linearVelo = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(linearVelo * moveSpeed, 0);
-        transform.Rotate(Vector3.forward * linearVelo * -2);
-        if (transform.rotation.z > 20f)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 20f);
-        }
-        if (transform.rotation.z < -20f)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, -20f);
-        }
-        Debug.Log(transform.rotation.z);
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
     }
 }
