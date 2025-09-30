@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 9220480608318440416}
   - component: {fileID: 3318705950025307156}
   - component: {fileID: 2580096238407953793}
+  - component: {fileID: -6057003138468562218}
   m_Layer: 0
   m_Name: Gas
   m_TagString: Gas
@@ -166,9 +167,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350287464978791037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fcf5997dea134d31a5d07c794f3f291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6057003138468562218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350287464978791037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa1c56f49e41458392d9b48f2c247dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4447389664102102401

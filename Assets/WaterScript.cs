@@ -17,8 +17,10 @@ public class WaterScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 
-    public void banish() { 
+    public void banish()
+    {
         Destroy(gameObject);
     }
 }

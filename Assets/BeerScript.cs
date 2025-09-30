@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BeerScript : MonoBehaviour
 {
+    public bool pause = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,16 +12,23 @@ public class BeerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Translate(Vector3.down * 10f * Time.deltaTime);
+        if (!pause) {
+            gameObject.transform.Translate(Vector3.down * 10f * Time.deltaTime);
+        }
         if (transform.position.y < -40)
         {
             Destroy(gameObject);
         }
     }
-    
+
 
     public void banish()
     {
         Destroy(gameObject);
+    }
+
+    public void freeze()
+    {
+        pause = true;
     }
 }

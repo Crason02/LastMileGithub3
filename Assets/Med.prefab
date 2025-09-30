@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: 8383257288487105029}
   - component: {fileID: 1967840260230718574}
   - component: {fileID: 3123984253948766740}
+  - component: {fileID: -7766167198499978289}
   m_Layer: 0
   m_Name: Med
-  m_TagString: Beer
+  m_TagString: Med
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,11 +168,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4109772466413099316}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef7cca48e6c38430b9a47eb910b9cfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7766167198499978289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109772466413099316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa1c56f49e41458392d9b48f2c247dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pause: 0
 --- !u!1 &5855794270662342268
 GameObject:
   m_ObjectHideFlags: 0

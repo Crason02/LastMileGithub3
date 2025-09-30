@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject[] healths;
     public GameObject textyk;
     public GameObject winwin;
+    public bool spin = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,6 +60,9 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             rb.linearVelocity = velo;
+            if (spin) {
+                transform.Rotate(0f, 0f, velo.x * 50f * Time.deltaTime);
+            }
         }
     }
 
@@ -73,8 +77,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Glass"))
         {
-            health -= 1;
-            gas -= 1;
+            health -= 2;
             updateUI();
             CameraShake.Instance.ShakeOnce(0.2f, 0.1f);
             Destroy(other.gameObject);
@@ -89,14 +92,14 @@ public class PlayerScript : MonoBehaviour
             explode2.Play();
             explode1.Play();
             CameraShake.Instance.ShakeOnce(0.3f, 0.3f);
-            health = 0;
-            mental = 0;
-            gas = 0;
             updateUI();
+            spin = false;
+            CameraShake.Instance.stopShake();
+            Invoke("gameOver", 4f);
         }
         if (other.CompareTag("Turtle"))
         {
-            mental -= 1;
+            mental -= 2;
             health += 1;
             if (health > 3)
             {
@@ -124,20 +127,20 @@ public class PlayerScript : MonoBehaviour
         {
             if (rb.linearVelocity.x != 0)
             {
-                velo = rb.linearVelocity;
+                velo = new Vector2(rb.linearVelocity.x*1.1f, rb.linearVelocity.y*1.1f);
                 freeze = true;
             }
             else
             {
-                health -= 1;
-                mental -= 1;
-                gas -= 1;
-                updateUI();
+                velo = new Vector2(6f, 0);
+                freeze = true;
             }
+            spin = true;
+            
         }
         if (other.CompareTag("Beer"))
         {
-            mental += 3;
+            mental += 1;
             if (mental > 3)
             {
                 mental = 3;
@@ -146,9 +149,9 @@ public class PlayerScript : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.CompareTag("Beer"))
+        if (other.CompareTag("Med"))
         {
-            health += 2;
+            health += 1;
             if (health > 3)
             {
                 health = 3;
@@ -201,18 +204,18 @@ public class PlayerScript : MonoBehaviour
         {
             if (rb.linearVelocity.x != 0)
             {
-                velo = rb.linearVelocity;
+                velo = rb.linearVelocity * 2;
                 freeze = true;
             }
             else
             {
-                velo = new Vector2(5f, 0);
+                velo = new Vector2(10f, 0);
                 freeze = true;
             }
-            CameraShake.Instance.ShakeOnce(5f, 1f);
             GameObject.Find("timer").GetComponent<TimerScript>().freeze();
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
-            Invoke("gameOver", 5f);
+            
+            CameraShake.Instance.startShake();
         }
         else if (health <= 0)
         {
@@ -224,7 +227,7 @@ public class PlayerScript : MonoBehaviour
             explode1.Play();
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
             GameObject.Find("timer").GetComponent<TimerScript>().freeze();
-            Invoke("gameOver", 5f);
+            Invoke("gameOver", 4f);
         }
         else if (gas <= 0)
         {
@@ -234,7 +237,7 @@ public class PlayerScript : MonoBehaviour
             ps2.Stop();
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
             GameObject.Find("timer").GetComponent<TimerScript>().freeze();
-            Invoke("gameOver", 5f);
+            Invoke("gameOver", 4f);
         }
     }
 
@@ -247,7 +250,7 @@ public class PlayerScript : MonoBehaviour
     {
         GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
         freeze = true;
-        textyk.SetActive(true);
+        winwin.SetActive(true);
     }
 
 }

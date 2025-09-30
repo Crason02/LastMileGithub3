@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class LevelScript : MonoBehaviour
 {
     public Transform road1;
@@ -13,6 +13,7 @@ public class LevelScript : MonoBehaviour
     public GameObject water;
     public GameObject beer;
     public GameObject med;
+    public List<GameObject> obstacles = new List<GameObject>();
 
     void Start()
     {
@@ -39,51 +40,57 @@ public class LevelScript : MonoBehaviour
         {
             road2.position = new Vector3(road2.position.x, road1.position.y + roadHeight, road2.position.z);
         }
-        
+
 
     }
 
     public void glassFunc()
     {
-        if (!stop) {
-            Instantiate(glass);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(glass));
             Invoke("glassFunc", Random.Range(10f, 20f));
         }
     }
     public void turtFunc()
     {
-        if (!stop) {
-            Instantiate(turtle);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(turtle));
             Invoke("turtFunc", Random.Range(10f, 20f));
         }
     }
     public void gasFunc()
     {
-        if (!stop) {
-            Instantiate(gas);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(gas));
             Invoke("gasFunc", Random.Range(10f, 20f));
         }
     }
 
     public void waterFunc()
     {
-        if (!stop) {
-            Instantiate(water);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(water));
             Invoke("waterFunc", Random.Range(10f, 20f));
         }
     }
     public void beerFunc()
     {
-        if (!stop) {
-            Instantiate(beer);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(beer));
             Invoke("beerFunc", Random.Range(10f, 20f));
         }
     }
 
     public void medFunc()
     {
-        if (!stop) {
-            Instantiate(med);
+        if (!stop)
+        {
+            obstacles.Add(Instantiate(med));
             Invoke("medFunc", Random.Range(10f, 20f));
         }
     }
@@ -91,5 +98,14 @@ public class LevelScript : MonoBehaviour
     public void freeze()
     {
         stop = true;
+        CancelInvoke();
+        obstacles.RemoveAll(obj => obj == null);
+        foreach (GameObject obj in obstacles)
+        {
+            if (obj.GetComponent<BeerScript>() != null&&obj!=null)
+            {
+                obj.GetComponent<BeerScript>().freeze();
+            }
+        }
     }
 }

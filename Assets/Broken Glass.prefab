@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7960714519949090398}
   - component: {fileID: 300193732126163853}
   - component: {fileID: 6950730493308708912}
+  - component: {fileID: 7344621715120395584}
   m_Layer: 0
   m_Name: Broken Glass
   m_TagString: Glass
@@ -41,7 +42,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4894023969967243020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d83560c3233fd474ca8a62897c281a70, type: 3}
   m_Name: 
@@ -82,6 +83,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -2.86, y: 25.82}
   m_Radius: 0.8
+--- !u!114 &7344621715120395584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894023969967243020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa1c56f49e41458392d9b48f2c247dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5717967440208121562
 GameObject:
   m_ObjectHideFlags: 0

@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 2266890016831779933}
   - component: {fileID: 2421822274967069833}
   - component: {fileID: 3111923405549575485}
+  - component: {fileID: -8160498351416338772}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Turtle
@@ -252,8 +253,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5812159331248145784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2b2494ebe2c748a385df71493623c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8160498351416338772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812159331248145784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa1c56f49e41458392d9b48f2c247dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
