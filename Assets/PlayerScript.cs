@@ -105,7 +105,9 @@ public class PlayerScript : MonoBehaviour
             {
                 health = 3;
             }
-            CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
+            if (mental>0) {
+                CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
+            }
             updateUI();
             Destroy(other.gameObject);
         }
@@ -121,6 +123,7 @@ public class PlayerScript : MonoBehaviour
                 health = 3;
             }
             updateUI();
+            CameraShake.Instance.ShakeOnce(0.2f, 0.05f);
             Destroy(other.gameObject);
         }
         if (other.CompareTag("Water"))
@@ -146,6 +149,7 @@ public class PlayerScript : MonoBehaviour
                 mental = 3;
             }
             updateUI();
+            CameraShake.Instance.ShakeOnce(0.2f, 0.05f);
             Destroy(other.gameObject);
         }
 
@@ -157,6 +161,7 @@ public class PlayerScript : MonoBehaviour
                 health = 3;
             }
             updateUI();
+            CameraShake.Instance.ShakeOnce(0.2f, 0.05f);
             Destroy(other.gameObject);
         }
     }
@@ -202,6 +207,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (mental <= 0)
         {
+            CameraShake.Instance.startShake();
             if (rb.linearVelocity.x != 0)
             {
                 velo = rb.linearVelocity * 2;
@@ -215,7 +221,7 @@ public class PlayerScript : MonoBehaviour
             GameObject.Find("timer").GetComponent<TimerScript>().freeze();
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
             
-            CameraShake.Instance.startShake();
+            
         }
         else if (health <= 0)
         {
