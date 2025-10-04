@@ -14,6 +14,9 @@ public class LevelScript : MonoBehaviour
     public GameObject beer;
     public GameObject med;
     public List<GameObject> obstacles = new List<GameObject>();
+    public GameObject endCut;
+    public bool cutting = false;
+    public bool yaCut = false;
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class LevelScript : MonoBehaviour
         Invoke("turtFunc", Random.Range(1f, 20f));
         Invoke("beerFunc", Random.Range(1f, 20f));
         Invoke("medFunc", Random.Range(1f, 20f));
+        endCut.SetActive(false);
     }
     void Update()
     {
@@ -30,13 +34,26 @@ public class LevelScript : MonoBehaviour
         {
             road1.Translate(Vector3.down * moveSpeed * Time.deltaTime);
             road2.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+
+        }
+        if (cutting)
+        {
+            if (endCut.transform.position.y > -91.01)
+            {
+                endCut.transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+            }
+            else if(!yaCut)
+            {
+                yaCut = true;
+                GameObject.Find("Player").GetComponent<PlayerScript>().win2();
+            }
         }
 
-        if (road1.position.y < -roadHeight)
+        if (road1.position.y < -roadHeight && !cutting)
         {
             road1.position = new Vector3(road1.position.x, road2.position.y + roadHeight, road1.position.z);
         }
-        if (road2.position.y < -roadHeight)
+        if (road2.position.y < -roadHeight && !cutting)
         {
             road2.position = new Vector3(road2.position.x, road1.position.y + roadHeight, road2.position.z);
         }
@@ -98,14 +115,29 @@ public class LevelScript : MonoBehaviour
     public void freeze()
     {
         stop = true;
-        CancelInvoke();
-        obstacles.RemoveAll(obj => obj == null);
+        stopSpawn();
         foreach (GameObject obj in obstacles)
         {
-            if (obj.GetComponent<BeerScript>() != null&&obj!=null)
+            if (obj.GetComponent<BeerScript>() != null && obj != null)
             {
                 obj.GetComponent<BeerScript>().freeze();
             }
         }
+    }
+
+    public void stopSpawn()
+    {
+        CancelInvoke();
+        obstacles.RemoveAll(obj => obj == null);
+    }
+
+    public void cutscene()
+    {
+        if (road1.position.y > road2.position.y)
+        {
+            endCut.transform.position = new Vector3(road2.position.x, road1.position.y, road2.position.z);
+        }
+        endCut.SetActive(true);
+        cutting = true;
     }
 }

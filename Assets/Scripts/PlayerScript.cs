@@ -60,7 +60,8 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             rb.linearVelocity = velo;
-            if (spin) {
+            if (spin)
+            {
                 transform.Rotate(0f, 0f, velo.x * 50f * Time.deltaTime);
             }
         }
@@ -84,6 +85,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.CompareTag("tree"))
         {
+            CameraShake.Instance.stopShake();
             velo = new Vector2(0, 0);
             freeze = true;
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
@@ -94,7 +96,6 @@ public class PlayerScript : MonoBehaviour
             CameraShake.Instance.ShakeOnce(0.3f, 0.3f);
             updateUI();
             spin = false;
-            CameraShake.Instance.stopShake();
             Invoke("gameOver", 4f);
         }
         if (other.CompareTag("Turtle"))
@@ -105,7 +106,8 @@ public class PlayerScript : MonoBehaviour
             {
                 health = 3;
             }
-            if (mental>0) {
+            if (mental > 0)
+            {
                 CameraShake.Instance.ShakeOnce(0.2f, 0.15f);
             }
             updateUI();
@@ -130,7 +132,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (rb.linearVelocity.x != 0)
             {
-                velo = new Vector2(rb.linearVelocity.x*1.1f, rb.linearVelocity.y*1.1f);
+                velo = new Vector2(rb.linearVelocity.x * 1.1f, rb.linearVelocity.y * 1.1f);
                 freeze = true;
             }
             else
@@ -139,7 +141,7 @@ public class PlayerScript : MonoBehaviour
                 freeze = true;
             }
             spin = true;
-            
+
         }
         if (other.CompareTag("Beer"))
         {
@@ -220,8 +222,8 @@ public class PlayerScript : MonoBehaviour
             }
             GameObject.Find("timer").GetComponent<TimerScript>().freeze();
             GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
-            
-            
+
+
         }
         else if (health <= 0)
         {
@@ -254,9 +256,20 @@ public class PlayerScript : MonoBehaviour
 
     public void winGame()
     {
+        GameObject.Find("timer").GetComponent<TimerScript>().freeze();
+        //GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+        GameObject.Find("LevelGenerator").GetComponent<LevelScript>().cutscene();
+        GameObject.Find("LevelGenerator").GetComponent<LevelScript>().stopSpawn();
+        //freeze = true;
+        //winwin.SetActive(true);
+    }
+
+    public void win2()
+    {
         GameObject.Find("LevelGenerator").GetComponent<LevelScript>().freeze();
+        ps1.Stop();
+        ps2.Stop();
         freeze = true;
-        winwin.SetActive(true);
     }
 
 }

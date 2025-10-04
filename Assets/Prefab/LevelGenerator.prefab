@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8867411778878183272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3546290020736250617}
+  - component: {fileID: 2085200019389466623}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3546290020736250617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8867411778878183272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6730862, y: -2.0019298, z: 0.051647227}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2085200019389466623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8867411778878183272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7481d2c648fb347c4a9946cfdd51ed10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  road1: {fileID: 0}
+  road2: {fileID: 0}
+  moveSpeed: 10
+  roadHeight: 20
+  stop: 0
+  glass: {fileID: 4894023969967243020, guid: ad5bc54d6ade143b2b4681aee7c540f4, type: 3}
+  turtle: {fileID: 5812159331248145784, guid: 28a85c28875594ad5a4c830e66ddb338, type: 3}
+  gas: {fileID: 1350287464978791037, guid: c8fa4a00dc6c24a18a465ce1d5a0ceb1, type: 3}
+  water: {fileID: 6473128997581659037, guid: 59b882b4b1ded4150837a642c3c08c31, type: 3}
+  beer: {fileID: 5464375871098738324, guid: 25f38e619fc454c55806b4e5d4043f3b, type: 3}
+  med: {fileID: 4109772466413099316, guid: 41006e928a0e842a89669115d7a33b32, type: 3}
+  obstacles: []
+  endCut: {fileID: 0}
+  cutting: 0
+  yaCut: 0

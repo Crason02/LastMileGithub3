@@ -15,7 +15,7 @@ public class TimerScript : MonoBehaviour
     {
         if (!stop)
         {
-            transform.position = new Vector3(transform.position.x - 0.0001f, transform.position.y, 0);
+            transform.position = new Vector3(transform.position.x - 0.0005f, transform.position.y, 0);
         }
     }
     
